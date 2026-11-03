@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Đặt nghệ sĩ — bản test</title>
+<meta name="description" content="Bản test: đặt MC, ca sĩ, nhóm nhạc cho tiệc cưới và sự kiện tại Hà Nội.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#101116">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Đặt nghệ sĩ">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c3aed'/%3E%3Ccircle cx='16' cy='12' r='6' fill='%23d7b46a'/%3E%3Crect x='14' y='17' width='4' height='10' rx='2' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+<style>
+/* Bố cục: khung ứng dụng điện thoại — đầu trang dính, nội dung cuộn, thanh tab dưới. Vùng khám phá là "sân khấu" tối; vùng giao dịch nền giấy sáng (§18). */
+:root{
+  --stage:#101116; --stage-2:#1b1c25; --stage-line:#33354a; --on-stage:#f3f2f8; --on-stage-2:#c4c3d3;
+  --bg:#f6f4ef; --card:#ffffff; --ink:#171923; --ink-2:#555b6e; --line:#e2dfd6;
+  --brand:#7c3aed; --brand-ink:#5b21b6; --brand-soft:#efe7ff; --gold:#d7b46a; --gold-ink:#7a5a14;
+  --ok:#166534; --ok-bg:#dcfce7; --warn:#8a4b00; --warn-bg:#fff1d6; --bad:#b42318; --bad-bg:#fee4e2; --info:#1e4fa3; --info-bg:#e0ebff; --mute-bg:#eceae4;
+  --font:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14151c; --card:#1d1f29; --ink:#eeedf5; --ink-2:#a9abbd; --line:#30323f;
+  --brand:#8b5cf6; --brand-ink:#c4b5fd; --brand-soft:#2a2340; --gold-ink:#e2c88a;
+  --ok:#86efac; --ok-bg:#12301e; --warn:#fcd38a; --warn-bg:#35270e; --bad:#fca5a5; --bad-bg:#3a1616; --info:#a5c4ff; --info-bg:#16233c; --mute-bg:#262834; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14151c; --card:#1d1f29; --ink:#eeedf5; --ink-2:#a9abbd; --line:#30323f;
+  --brand:#8b5cf6; --brand-ink:#c4b5fd; --brand-soft:#2a2340; --gold-ink:#e2c88a;
+  --ok:#86efac; --ok-bg:#12301e; --warn:#fcd38a; --warn-bg:#35270e; --bad:#fca5a5; --bad-bg:#3a1616; --info:#a5c4ff; --info-bg:#16233c; --mute-bg:#262834; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--stage)}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{margin:0;line-height:1.25;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:8px}
+.app{max-width:560px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+/* đầu trang */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--stage);color:var(--on-stage);display:flex;align-items:center;gap:10px;padding-block:10px;border-bottom:1px solid var(--stage-line)}
+.mark{width:28px;height:28px;border-radius:8px;flex:none;background:conic-gradient(from 210deg,#7c3aed,#c084fc,#d7b46a,#7c3aed)}
+.brand{font-weight:800;font-size:17px;min-width:0}
+.brand small{display:block;font-weight:500;font-size:11px;color:var(--on-stage-2);letter-spacing:.02em}
+.who{margin-left:auto;white-space:nowrap;flex:none;display:flex;align-items:center;gap:6px;background:var(--stage-2);border:1px solid var(--stage-line);border-radius:999px;padding:6px 10px 6px 12px;min-height:40px;font-size:13px;font-weight:600;cursor:pointer}
+.who .r{color:var(--gold);font-weight:700}
+.back{display:inline-flex;align-items:center;gap:6px;min-height:44px;background:none;border:0;color:var(--brand-ink);font-weight:600;padding:0;cursor:pointer}
+main{flex:1;padding-block:14px 110px}
+/* thanh tab dưới */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.tabs .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.tab{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:52px;justify-content:center;border:0;background:none;border-radius:12px;color:var(--ink-2);font-size:12px;font-weight:600;cursor:pointer}
+.tab svg{width:22px;height:22px}
+.tab[aria-current="page"]{color:var(--brand-ink);background:var(--brand-soft)}
+.dot{position:absolute;top:4px;right:calc(50% - 22px);min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--bad);color:#fff;font-size:11px;display:grid;place-items:center}
+/* chung */
+.stack{display:grid;gap:12px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.between{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.muted{color:var(--ink-2)} .small{font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2)}
+.h1{font-size:24px;font-weight:800} .h2{font-size:19px;font-weight:700} .h3{font-size:16px;font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 16px;border-radius:12px;border:1.5px solid transparent;font-weight:700;cursor:pointer;text-align:center}
+.btn:active{translate:0 1px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.primary{background:var(--brand);color:#fff}
+.outline{background:transparent;border-color:var(--brand);color:var(--brand-ink)}
+.ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.danger{background:transparent;border-color:var(--bad);color:var(--bad)}
+.block{width:100%}
+.badge{display:inline-flex;align-items:center;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.t-ok{background:var(--ok-bg);color:var(--ok)} .t-warn{background:var(--warn-bg);color:var(--warn)} .t-bad{background:var(--bad-bg);color:var(--bad)} .t-info{background:var(--info-bg);color:var(--info)} .t-mute{background:var(--mute-bg);color:var(--ink-2)}
+.chip{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:700;background:var(--brand-soft);color:var(--brand-ink)}
+.chip.demo{background:rgba(215,180,106,.2);color:var(--gold-ink)}
+label{font-size:14px;font-weight:600}
+.field{display:grid;gap:5px}
+input,select,textarea{width:100%;min-height:46px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--card)}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(124,58,237,.18)}
+.hint{font-size:13px;color:var(--ink-2)}
+.err{background:var(--bad-bg);color:var(--bad);border-radius:12px;padding:10px 12px;font-weight:600;font-size:14px}
+.okmsg{background:var(--ok-bg);color:var(--ok);border-radius:12px;padding:10px 12px;font-weight:600;font-size:14px}
+.two{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+.money{display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.money div{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px dashed var(--line)}
+.money .tot{font-weight:800;border-bottom:0}
+.list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.empty{border:1.5px dashed var(--line);border-radius:16px;padding:18px;text-align:center;color:var(--ink-2)}
+/* sân khấu khám phá */
+.stage{background:var(--stage);color:var(--on-stage);margin-top:-14px;padding-block:18px 22px;border-radius:0 0 24px 24px;position:relative;overflow:hidden}
+.stage::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 90% at 15% 0%,rgba(124,58,237,.45),transparent 70%),radial-gradient(50% 70% at 90% 10%,rgba(215,180,106,.22),transparent 70%);pointer-events:none}
+.stage>*{position:relative}
+.stage h1{font-size:28px;font-weight:800;color:#fff;margin-top:6px}
+.stage p{color:var(--on-stage-2);margin-top:8px}
+.eyebrow{color:var(--gold);font-weight:700;font-size:13px;letter-spacing:.04em}
+.trust{display:grid;gap:4px;margin-top:12px;font-size:13px;color:var(--on-stage-2)}
+.filters{display:flex;gap:8px;overflow-x:auto;padding-block:12px 2px}
+.pill{flex:none;min-height:40px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-weight:600;cursor:pointer}
+.pill[aria-pressed="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+.artist{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center;cursor:pointer;text-align:left;width:100%}
+.vis{aspect-ratio:1;border-radius:14px;position:relative;overflow:hidden;background:radial-gradient(80% 90% at 50% 110%,hsl(var(--h) 75% 55% / .8),transparent 60%),linear-gradient(180deg,#0c0c11,hsl(var(--h) 45% 16%));display:grid;place-items:center;color:rgba(255,255,255,.9);font-weight:800;font-size:28px;max-width:100%}
+.vis.big{aspect-ratio:16/9;border-radius:18px;font-size:46px}
+.vis span{position:absolute;left:6px;bottom:6px;font-size:10px;font-weight:600;background:rgba(0,0,0,.55);color:#fff;padding:1px 6px;border-radius:99px}
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;font-size:11px;text-align:center;color:var(--ink-2)}
+.timeline div{display:grid;justify-items:center;gap:4px}
+.timeline i{width:24px;height:24px;border-radius:99px;border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-weight:700;font-size:12px;background:var(--card)}
+.timeline .done i{background:var(--brand);border-color:var(--brand);color:#fff}
+.timeline .cur{color:var(--ink);font-weight:700} .timeline .cur i{border-color:var(--brand);color:var(--brand-ink)}
+.next{background:var(--brand-soft);border-radius:14px;padding:12px;font-weight:600}
+.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;letter-spacing:.06em}
+.thread{display:grid;gap:6px}
+.msg{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px;max-width:88%}
+.msg.me{margin-left:auto;background:var(--brand-soft);border-color:transparent}
+.sev-khan{border-left:5px solid var(--bad)} .sev-cao{border-left:5px solid var(--warn)}
+/* bảng thử nghiệm */
+.sheet-bg{position:fixed;inset:0;background:rgba(10,10,16,.55);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--card);width:100%;max-width:560px;border-radius:20px 20px 0 0;max-height:88%;overflow:auto;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.users{display:grid;gap:8px}
+.user{display:flex;justify-content:space-between;align-items:center;min-height:50px;padding:8px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);cursor:pointer;text-align:left;width:100%}
+.user[aria-current="true"]{border-color:var(--brand);background:var(--brand-soft)}
+.clock{font-variant-numeric:tabular-nums;font-weight:700}
+.toast{position:fixed;left:50%;translate:-50% 0;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;max-width:calc(100% - 32px);text-align:center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+
+<div class="app">
+  <header class="top wrap" id="top"></header>
+  <main class="wrap" id="main"></main>
+</div>
+<nav class="tabs" aria-label="Điều hướng"><div class="in" id="tabs"></div></nav>
+<div id="overlay"></div>
+
+<script>
+"use strict";
+/* ============================================================
+   BẢN TEST GIAO DIỆN & LUỒNG — logic nghiệp vụ chạy ngay trong trình duyệt theo đúng quy tắc của backend R2
+   (backend thật ở supabase/, đã kiểm thử 101/101 trên PostgreSQL). Dữ liệu là dữ liệu thử, lưu trên máy này.
+   ============================================================ */
+const H=3600e3, D=24*H, MIN=60e3;
+const CFG={hold:60*MIN, buffer:60*MIN, wave:3, respond:24*H, startWin:120*MIN, depMin:20, depMax:50, depDef:30, payConfirm:24*H, suspend:90*D};
+const POLICY=[{min:30,pct:100},{min:8,pct:50},{min:0,pct:0}];
+const SVC={ca_si:"Ca sĩ",mc:"MC",ban_nhac:"Nhóm nhạc"};
+const KIND={bieu_dien:"Biểu diễn",thiet_bi:"Thiết bị",di_chuyen:"Di chuyển",tap_luyen:"Tập luyện",lam_them:"Làm thêm giờ",khac:"Khác"};
+const LBL={da_gui:"Đã gửi",dang_tim:"Đang nhận báo giá",da_chon_gia:"Đang giữ lịch",dong:"Đã chốt",huy:"Đã hủy",moi:"Chờ phản hồi",hoi_them:"Nghệ sĩ hỏi thêm",tu_choi:"Không nhận",da_bao_gia:"Đã báo giá",duoc_chon:"Được chọn",bi_tu_choi:"Không được chọn",het_han:"Hết hạn",bi_thay:"Có bản mới",cho_xac_nhan:"Chờ cọc",da_xac_nhan:"Đã xác nhận",dang_thuc_hien:"Đang diễn",cho_hoan_tat:"Chờ khách xác nhận",hoan_thanh:"Hoàn thành",cho_doi_soat:"Chờ xác nhận",da_nhan:"Đã nhận",dang_xu_ly:"Đang xử lý",da_giai_quyet:"Đã giải quyết",cho_duyet:"Chờ duyệt",da_duyet:"Đã duyệt",nhap:"Nháp"};
+const TONE={da_xac_nhan:"ok",hoan_thanh:"ok",da_nhan:"ok",da_duyet:"ok",dong:"ok",duoc_chon:"ok",da_giai_quyet:"ok",cho_xac_nhan:"warn",cho_doi_soat:"warn",da_chon_gia:"warn",cho_hoan_tat:"warn",cho_duyet:"warn",hoi_them:"info",moi:"info",dang_tim:"info",da_gui:"info",da_bao_gia:"info",dang_thuc_hien:"info",dang_xu_ly:"info",huy:"bad",tu_choi:"bad",het_han:"mute",bi_tu_choi:"mute",bi_thay:"mute",nhap:"mute"};
+
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const vnd=n=>n==null?"—":Number(n).toLocaleString("vi-VN")+" đ";
+const fmtD=new Intl.DateTimeFormat("vi-VN",{timeZone:"Asia/Ho_Chi_Minh",weekday:"short",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
+const fmtT=new Intl.DateTimeFormat("vi-VN",{timeZone:"Asia/Ho_Chi_Minh",hour:"2-digit",minute:"2-digit"});
+const dt=ms=>fmtD.format(ms), tm=ms=>fmtT.format(ms);
+const range=(a,b)=>`${dt(a)}–${tm(b)}`;
+const badge=s=>`<span class="badge t-${TONE[s]||"mute"}">${esc(LBL[s]||s)}</span>`;
+const uid=p=>p+"_"+Math.random().toString(36).slice(2,10);
+const toLocal=ms=>new Date(ms+7*H).toISOString().slice(0,16);
+function parseLocal(v){const m=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(v||"");if(!m)return null;const [y,mo,d,h,mi]=m.slice(1).map(Number);const ms=Date.UTC(y,mo-1,d,h,mi)-7*H;const b=new Date(ms+7*H);return b.getUTCDate()===d&&b.getUTCMonth()===mo-1?ms:null}
+function parseVnd(v){const t=String(v??"").trim().replace(/\s*(đ|vnđ|vnd)$/i,"");if(!t)return null;if(!/^\d+$/.test(t)&&!/^\d{1,3}(?:([.,\s])\d{3})(?:\1\d{3})*$/.test(t))return NaN;const n=Number(t.replace(/[.,\s]/g,""));return Number.isSafeInteger(n)?n:NaN}
+class Err extends Error{}
+const fail=m=>{throw new Err(m)};
+
+/* ---------- dữ liệu ---------- */
+const KEY="dns-test-v1";
+function seed(){
+  const t0=Date.now();
+  const users=[
+    {id:"u_lan",name:"Chị Lan",role:"customer",sub:"Khách tổ chức cưới"},
+    {id:"u_ks",name:"KS Hồ Tây",role:"customer",sub:"Khách doanh nghiệp"},
+    {id:"u_minh",name:"Minh Anh",role:"artist",sub:"Ca sĩ"},
+    {id:"u_tuan",name:"MC Tuấn Kha",role:"artist",sub:"MC"},
+    {id:"u_linh",name:"Linh Đan",role:"artist",sub:"Ca sĩ jazz"},
+    {id:"u_gio",name:"Nhóm Gió Mùa",role:"artist",sub:"Nhóm acoustic"},
+    {id:"u_hoa",name:"Hòa",role:"coordinator",sub:"Điều phối"},
+  ];
+  const A=(id,owner,name,svc,genres,price,hue,bio,events)=>({id,owner,name,svc,genres,price,hue,bio,events,area:"Hà Nội",status:"da_duyet",suspendedUntil:0,payout:null});
+  const artists=[
+    A("a_minh","u_minh","Minh Anh","ca_si","Ballad · Nhạc trẻ · Acoustic",3000000,285,"Giọng nữ ballad/pop cho tiệc cưới và nhà hàng. Hát cùng beat hoặc guitar đệm.","Cưới · Sinh nhật · Nhà hàng"),
+    A("a_tuan","u_tuan","MC Tuấn Kha","mc","MC cưới · Sự kiện doanh nghiệp",4000000,220,"MC song ngữ dẫn lễ cưới truyền thống và hiện đại, khai trương, gala. Cần kịch bản trước 3 ngày.","Cưới · Khai trương · Doanh nghiệp"),
+    A("a_linh","u_linh","Linh Đan","ca_si","Jazz · Bossa nova",null,340,"Ca sĩ jazz cho tiệc khách sạn, sự kiện doanh nghiệp và lounge.","Doanh nghiệp · Nhà hàng"),
+    A("a_gio","u_gio","Nhóm Gió Mùa","ban_nhac","Acoustic · Jazz nhẹ · Bolero",8000000,25,"Nhóm acoustic 4 người, có loa nhỏ cho không gian dưới 150 khách. Đại diện nhóm xác nhận lịch.","Nhà hàng · Cưới"),
+  ];
+  artists[0].payout={bank:"Vietcombank",number:"0123456789",holder:"NGUYEN MINH ANH"};
+  artists[1].payout={bank:"Techcombank",number:"1903456789012",holder:"TRAN TUAN KHA"};
+  return {v:1,offset:0,me:"u_lan",users,artists,requests:[],invitations:[],quotes:[],holds:[],slots:[],bookings:[],payments:[],incidents:[],messages:[],notifs:[],audit:[],deleted:[],created:t0};
+}
+let S; let mem=null;
+function load(){try{const r=localStorage.getItem(KEY);if(r){S=JSON.parse(r);return}}catch(e){} S=mem||seed()}
+function save(){mem=S;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+const now=()=>Date.now()+S.offset;
+const me=()=>S.users.find(u=>u.id===S.me);
+const myArtist=()=>S.artists.find(a=>a.owner===S.me);
+const artist=id=>S.artists.find(a=>a.id===id);
+const userName=id=>(S.users.find(u=>u.id===id)||{}).name||"Người dùng";
+function notify(user,text,go){if(user)S.notifs.unshift({id:uid("n"),user,text,go,at:now(),read:false})}
+function staffNotify(text,go){S.users.filter(u=>u.role==="coordinator").forEach(u=>notify(u.id,text,go))}
+function audit(action,ref){S.audit.unshift({action,ref,by:S.me,at:now()})}
+function need(...roles){const u=me();if(!u||S.deleted.includes(u.id))fail("Tài khoản không còn hoạt động.");if(!roles.includes(u.role))fail("Vai trò hiện tại không làm được thao tác này.");return u}
+
+/* ---------- quy tắc nghiệp vụ (giống backend R2) ---------- */
+function sweep(){
+  const t=now();
+  S.invitations.forEach(i=>{if((i.status==="moi"||i.status==="hoi_them")&&i.respondBy<=t){i.status="dong";i.reason="Quá hạn phản hồi";const r=S.requests.find(x=>x.id===i.req);notify(r.customer,`${artist(i.artist).name} không phản hồi đúng hạn — bạn có thể mời người khác`,{v:"req",id:r.id})}});
+  S.holds.forEach(h=>{if(h.status==="dang_giu"&&h.expires<=t){h.status="het_han";const s=S.slots.find(x=>x.id===h.slot);s.active=false;const q=S.quotes.find(x=>x.id===h.quote);if(q.status==="duoc_chon")q.status=q.validUntil>t?"da_gui":"het_han";const r=S.requests.find(x=>x.id===h.req);if(r.status==="da_chon_gia")r.status="dang_tim";notify(h.customer,"Giữ lịch đã hết hạn — lịch của nghệ sĩ đã được giải phóng",{v:"req",id:r.id})}});
+  S.quotes.forEach(q=>{if(q.status==="da_gui"&&q.validUntil<=t)q.status="het_han"});
+  S.payments.forEach(p=>{if(p.status==="cho_doi_soat"&&p.kind!=="hoan_tien"&&t-p.at>CFG.payConfirm&&!p.flagged){p.flagged=true;S.incidents.unshift({id:uid("i"),booking:p.booking,kind:"Tranh chấp tiền",sev:"cao",desc:`Khoản ${vnd(p.amount)} chưa được nghệ sĩ xác nhận sau 24 giờ.`,status:"moi",at:t,res:""});staffNotify("Khoản tiền chưa được xác nhận quá hạn",{v:"booking",id:p.booking})}});
+}
+const overlap=(artistId,a,b,skip)=>S.slots.some(s=>s.active&&s.artist===artistId&&s.id!==skip&&s.a<b&&s.b>a);
+const busy=(artistId,a,b)=>overlap(artistId,a-CFG.buffer,b+CFG.buffer);
+
+function createRequest(f){
+  const u=need("customer");
+  const s=parseLocal(f.start), e=parseLocal(f.end);
+  if(!f.event)fail("Chọn loại sự kiện.");
+  if(!SVC[f.svc])fail("Chọn dịch vụ cần thuê.");
+  if(s==null||e==null)fail("Nhập ngày giờ bắt đầu và kết thúc hợp lệ.");
+  if(e<=s)fail("Giờ kết thúc phải sau giờ bắt đầu.");
+  if(e-s>16*H)fail("Một buổi tối đa 16 giờ.");
+  if(s<now()+H)fail("Sự kiện cần bắt đầu sau hiện tại ít nhất 1 giờ.");
+  if(!f.area||f.area.trim().length<2)fail("Nhập phường/xã hoặc khu vực.");
+  const budget=parseVnd(f.budget); if(Number.isNaN(budget))fail("Ngân sách: nhập số tiền VNĐ, ví dụ 5.000.000.");
+  const r={id:uid("r"),customer:u.id,event:f.event,svc:f.svc,start:s,end:e,area:f.area.trim(),budget,style:(f.style||"").trim().slice(0,300),contact:(f.contact||"").trim().slice(0,150),notes:(f.notes||"").trim().slice(0,1500),address:null,status:"da_gui",at:now()};
+  S.requests.unshift(r); audit("Gửi yêu cầu",r.id); staffNotify(`Yêu cầu mới: ${SVC[r.svc]} cho ${r.event}`,{v:"req",id:r.id});
+  if(f.invite)invite(r.id,[f.invite]);
+  return r;
+}
+function invite(reqId,ids){
+  sweep();
+  const u=me(), r=S.requests.find(x=>x.id===reqId);
+  if(!(u.role==="coordinator"||r.customer===u.id))fail("Không có quyền mời cho yêu cầu này.");
+  if(!["da_gui","dang_tim"].includes(r.status))fail("Yêu cầu đã chốt hoặc đã đóng.");
+  if(!ids.length)fail("Chọn ít nhất một nghệ sĩ.");
+  const open=S.invitations.filter(i=>i.req===reqId&&["moi","hoi_them"].includes(i.status)).length;
+  const fresh=ids.filter(a=>!S.invitations.some(i=>i.req===reqId&&i.artist===a));
+  if(open+fresh.length>CFG.wave)fail(`Mỗi đợt chỉ mời tối đa ${CFG.wave} nghệ sĩ đang chờ phản hồi.`);
+  fresh.forEach(aid=>{const a=artist(aid);
+    if(a.status!=="da_duyet")fail("Chỉ mời được nghệ sĩ đã duyệt.");
+    if(a.suspendedUntil>now())fail(`${a.name} đang tạm ngừng nhận lời mời.`);
+    if(a.svc!==r.svc)fail(`${a.name} không cung cấp dịch vụ này.`);
+    S.invitations.push({id:uid("v"),req:reqId,artist:aid,status:"moi",reason:"",respondBy:now()+CFG.respond,at:now()});
+    notify(a.owner,`Lời mời báo giá: ${r.event} (${r.area})`,{v:"inv"});});
+  if(r.status==="da_gui")r.status="dang_tim";
+  audit("Mời báo giá",reqId);
+}
+function respond(invId,action,reason){
+  sweep(); const a=myArtist(); need("artist");
+  const i=S.invitations.find(x=>x.id===invId&&x.artist===a.id); if(!i)fail("Không tìm thấy lời mời.");
+  if(!["moi","hoi_them"].includes(i.status))fail("Lời mời đã được xử lý hoặc quá hạn.");
+  if(!reason||reason.trim().length<3)fail(action==="tu_choi"?"Chọn lý do.":"Nhập câu hỏi cho khách.");
+  i.status=action;i.reason=reason.trim();
+  const r=S.requests.find(x=>x.id===i.req);
+  if(action==="hoi_them")S.messages.push({id:uid("m"),req:r.id,artist:a.id,from:S.me,body:reason.trim(),at:now()});
+  notify(r.customer,`${a.name} ${action==="tu_choi"?"không nhận":"hỏi thêm về"} ${r.event}`,{v:"req",id:r.id});
+}
+function sendQuote(reqId,items,depositRaw,days,scope){
+  sweep(); need("artist"); const a=myArtist();
+  const i=S.invitations.find(x=>x.req===reqId&&x.artist===a.id); if(!i)fail("Bạn chưa được mời báo giá cho yêu cầu này.");
+  if(!["moi","hoi_them","da_bao_gia"].includes(i.status))fail(i.reason==="Quá hạn phản hồi"?"Lời mời đã quá hạn phản hồi.":"Lời mời đã đóng.");
+  const r=S.requests.find(x=>x.id===reqId); if(!["da_gui","dang_tim"].includes(r.status))fail("Khách đã chốt hoặc đóng yêu cầu.");
+  if(!items.length)fail("Báo giá cần ít nhất một hạng mục.");
+  items.forEach((it,n)=>{if(Number.isNaN(it.amount)||it.amount<0)fail(`Hạng mục ${n+1}: nhập số tiền VNĐ nguyên dương.`)});
+  const total=items.reduce((s,x)=>s+x.amount,0);
+  const dep=parseVnd(depositRaw); if(dep==null||Number.isNaN(dep))fail("Tiền cọc: nhập số tiền VNĐ.");
+  if(total>0&&(dep*100<total*CFG.depMin||dep*100>total*CFG.depMax))fail(`Tiền cọc phải từ ${CFG.depMin}% đến ${CFG.depMax}% tổng (${vnd(Math.round(total*CFG.depMin/100))} – ${vnd(Math.round(total*CFG.depMax/100))}).`);
+  if(!scope||scope.trim().length<10)fail("Mô tả phạm vi ít nhất 10 ký tự.");
+  if(S.quotes.some(q=>q.req===reqId&&q.artist===a.id&&q.status==="duoc_chon"))fail("Khách đang giữ lịch theo báo giá hiện tại.");
+  const ver=1+Math.max(0,...S.quotes.filter(q=>q.req===reqId&&q.artist===a.id).map(q=>q.ver));
+  S.quotes.forEach(q=>{if(q.req===reqId&&q.artist===a.id&&q.status==="da_gui")q.status="bi_thay"});
+  const q={id:uid("q"),req:reqId,artist:a.id,ver,status:"da_gui",items,total,deposit:dep,validUntil:Math.min(now()+days*D,r.start),scope:scope.trim(),at:now()};
+  S.quotes.push(q);i.status="da_bao_gia";audit("Gửi báo giá",q.id);
+  notify(r.customer,`${a.name} đã gửi báo giá${ver>1?" (bản "+ver+")":""}`,{v:"req",id:r.id});
+}
+function postMessage(reqId,artistId,body){
+  const u=me(),r=S.requests.find(x=>x.id===reqId);
+  if(!body||!body.trim())fail("Nhập nội dung tin nhắn.");
+  let thread=artistId;
+  if(u.role==="artist"){thread=myArtist().id;notify(r.customer,"Bạn có tin nhắn mới",{v:"req",id:r.id})}
+  else{const i=S.invitations.find(x=>x.req===reqId&&x.artist===artistId);if(!i)fail("Chỉ nhắn được cho nghệ sĩ đã được mời.");
+    const booked=S.bookings.some(b=>b.req===reqId&&b.artist===artistId&&b.status!=="huy");
+    if(!booked&&["dong","tu_choi"].includes(i.status))fail("Nghệ sĩ này không còn nhận yêu cầu (đã từ chối hoặc quá hạn).");
+    if(i.status==="hoi_them")i.respondBy=now()+CFG.respond;
+    notify(artist(artistId).owner,"Khách gửi tin nhắn mới",{v:"inv"})}
+  S.messages.push({id:uid("m"),req:reqId,artist:thread,from:u.id,body:body.trim().slice(0,2000),at:now()});
+}
+function acceptQuote(qid){
+  sweep(); const u=need("customer"); const q=S.quotes.find(x=>x.id===qid), r=S.requests.find(x=>x.id===q.req);
+  if(r.customer!==u.id)fail("Không có quyền.");
+  if(q.status==="het_han"||q.validUntil<=now())fail("Báo giá đã hết hạn.");
+  if(q.status!=="da_gui")fail("Báo giá không còn khả dụng.");
+  if(!["da_gui","dang_tim"].includes(r.status))fail("Yêu cầu đã có lựa chọn đang giữ hoặc đã đóng.");
+  if(overlap(q.artist,r.start-CFG.buffer,r.end+CFG.buffer))fail("Khung giờ này nghệ sĩ đã có lịch khác (tính cả thời gian di chuyển).");
+  const slot={id:uid("s"),artist:q.artist,kind:"giu_cho",a:r.start-CFG.buffer,b:r.end+CFG.buffer,active:true,note:""};S.slots.push(slot);
+  const h={id:uid("h"),quote:q.id,req:r.id,artist:q.artist,customer:u.id,slot:slot.id,status:"dang_giu",expires:now()+CFG.hold};S.holds.push(h);
+  q.status="duoc_chon";r.status="da_chon_gia";audit("Giữ lịch",h.id);
+  notify(artist(q.artist).owner,"Khách đã chọn báo giá của bạn và đang giữ lịch",{v:"cal"});
+  return h;
+}
+function releaseHold(hid){sweep();const h=S.holds.find(x=>x.id===hid);if(h.status!=="dang_giu")fail("Giữ lịch không còn hiệu lực.");h.status="giai_phong";S.slots.find(s=>s.id===h.slot).active=false;const q=S.quotes.find(x=>x.id===h.quote);if(q.status==="duoc_chon")q.status="da_gui";const r=S.requests.find(x=>x.id===h.req);if(r.status==="da_chon_gia")r.status="dang_tim"}
+function confirmBooking(hid,address){
+  const u=need("customer");
+  const ex=S.bookings.find(b=>b.hold===hid); if(ex)return ex;
+  if(!address||address.trim().length<5)fail("Nhập địa chỉ tổ chức cụ thể (ít nhất 5 ký tự).");
+  sweep(); const h=S.holds.find(x=>x.id===hid);
+  if(h.status==="het_han")fail("Giữ lịch đã hết hạn. Nếu bạn đã chuyển khoản, hãy báo sự cố để điều phối kiểm tra.");
+  if(h.status!=="dang_giu")fail("Giữ lịch không còn hiệu lực.");
+  const q=S.quotes.find(x=>x.id===h.quote), r=S.requests.find(x=>x.id===h.req);
+  let code;do{code=Math.random().toString(16).slice(2,10).toUpperCase()}while(S.bookings.some(b=>b.code===code));
+  const b={id:uid("b"),code,req:r.id,quote:q.id,hold:h.id,artist:h.artist,customer:u.id,slot:h.slot,status:"cho_xac_nhan",snap:{ver:q.ver,items:q.items,scope:q.scope,total:q.total,deposit:q.deposit,acceptedAt:now(),policy:POLICY},total:q.total,deposit:q.deposit,start:r.start,end:r.end,refund:null,cancelBy:null,cancelReason:""};
+  S.bookings.unshift(b); r.address=address.trim();
+  S.slots.find(s=>s.id===h.slot).kind="booking"; h.status="thanh_booking";
+  S.quotes.forEach(x=>{if(x.req===r.id&&x.id!==q.id&&x.status==="da_gui")x.status="bi_tu_choi"});
+  S.invitations.forEach(i=>{if(i.req===r.id&&i.artist!==h.artist&&["moi","hoi_them","da_bao_gia"].includes(i.status))i.status="dong"});
+  r.status="dong"; audit("Tạo booking",b.id);
+  notify(artist(b.artist).owner,`Khách xác nhận đặt show ${b.code} — chờ khách chuyển cọc vào tài khoản của bạn`,{v:"booking",id:b.id});
+  return b;
+}
+const paid=b=>S.payments.filter(p=>p.booking===b.id&&p.status==="da_nhan"&&p.kind!=="hoan_tien").reduce((s,p)=>s+p.amount,0);
+const pendingIn=b=>S.payments.filter(p=>p.booking===b.id&&p.status==="cho_doi_soat"&&p.kind!=="hoan_tien").reduce((s,p)=>s+p.amount,0);
+const refunded=b=>S.payments.filter(p=>p.booking===b.id&&p.kind==="hoan_tien"&&p.status==="da_nhan").reduce((s,p)=>s+p.amount,0);
+function reportPayment(bid,kind,amountRaw,note){
+  const u=need("customer"); const b=S.bookings.find(x=>x.id===bid);
+  if(b.customer!==u.id)fail("Không có quyền."); if(b.status==="huy")fail("Booking đã hủy.");
+  const amount=parseVnd(amountRaw); if(!amount||Number.isNaN(amount))fail("Số tiền: nhập số VNĐ nguyên dương.");
+  if(amount+pendingIn(b)+paid(b)>b.total)fail("Số tiền vượt quá tổng còn phải trả.");
+  S.payments.push({id:uid("p"),booking:bid,kind,amount,status:"cho_doi_soat",note:(note||"").slice(0,300),by:u.id,at:now()});
+  notify(artist(b.artist).owner,`Khách báo đã chuyển ${vnd(amount)} cho show ${b.code} — kiểm tra tài khoản và xác nhận`,{v:"booking",id:b.id});
+}
+function confirmPayment(pid,decision,note){
+  const u=me(), p=S.payments.find(x=>x.id===pid), b=S.bookings.find(x=>x.id===p.booking);
+  const isArtist=artist(b.artist).owner===u.id, isCustomer=b.customer===u.id, staff=u.role==="coordinator";
+  const allowed=(p.kind==="hoan_tien"?isCustomer:isArtist)||staff;
+  if(!allowed)fail(p.kind==="hoan_tien"?"Khách là người xác nhận đã nhận lại tiền.":"Nghệ sĩ (người nhận tiền) xác nhận khoản này.");
+  if(staff&&!(p.kind==="hoan_tien"?isCustomer:isArtist)&&(!note||note.trim().length<5))fail("Điều phối xác nhận thay cần ghi căn cứ.");
+  if(p.status!=="cho_doi_soat")fail("Khoản này đã được xác nhận.");
+  if(decision==="tu_choi"&&(!note||note.trim().length<5))fail("Ghi lý do không khớp.");
+  p.status=decision;p.verifiedBy=u.id;p.reason=note||"";
+  if(decision==="tu_choi"){S.incidents.unshift({id:uid("i"),booking:b.id,kind:"Tranh chấp tiền",sev:"cao",desc:`Khoản ${vnd(p.amount)} bị báo không khớp: ${note}`,status:"moi",at:now(),res:""});staffNotify(`Tranh chấp tiền ở ${b.code}`,{v:"booking",id:b.id})}
+  notify(p.by,decision==="da_nhan"?"Khoản tiền đã được xác nhận":"Khoản tiền bị báo không khớp: "+note,{v:"booking",id:b.id});
+  if(decision==="da_nhan"&&b.status==="cho_xac_nhan"&&paid(b)>=b.deposit){b.status="da_xac_nhan";audit("Xác nhận booking",b.id);notify(b.customer,`Booking ${b.code} đã được xác nhận`,{v:"booking",id:b.id});notify(artist(b.artist).owner,`Booking ${b.code} đã được xác nhận`,{v:"booking",id:b.id})}
+}
+function recordRefund(bid,amountRaw,reason){
+  const u=me(),b=S.bookings.find(x=>x.id===bid);
+  if(!(artist(b.artist).owner===u.id||u.role==="coordinator"))fail("Người nhận tiền ghi nhận hoàn tiền.");
+  const amount=parseVnd(amountRaw); if(!amount||Number.isNaN(amount))fail("Số tiền hoàn: nhập số VNĐ nguyên dương.");
+  if(!reason||reason.trim().length<5)fail("Ghi lý do hoàn tiền.");
+  const pend=S.payments.filter(p=>p.booking===b.id&&p.kind==="hoan_tien"&&p.status!=="tu_choi").reduce((s,p)=>s+p.amount,0);
+  if(amount+pend>paid(b))fail("Số hoàn vượt số tiền đã nhận.");
+  S.payments.push({id:uid("p"),booking:bid,kind:"hoan_tien",amount,status:"cho_doi_soat",note:reason.trim(),by:u.id,at:now()});
+  notify(b.customer,`Đã ghi nhận hoàn ${vnd(amount)} — xác nhận khi bạn nhận được`,{v:"booking",id:b.id});
+}
+function advance(bid,action){
+  const u=me(),b=S.bookings.find(x=>x.id===bid),isArtist=artist(b.artist).owner===u.id,staff=u.role==="coordinator";
+  if(action==="bat_dau"){if(!(isArtist||staff))fail("Chỉ nghệ sĩ bấm Bắt đầu.");if(b.status!=="da_xac_nhan")fail("Booking chưa xác nhận.");if(now()<b.start-CFG.startWin)fail("Chưa tới khung giờ bắt đầu.");b.status="dang_thuc_hien"}
+  else if(action==="ket_thuc"){if(!(isArtist||staff))fail("Chỉ nghệ sĩ bấm Kết thúc.");if(b.status!=="dang_thuc_hien")fail("Show chưa bắt đầu.");if(now()<b.start)fail("Chưa đến giờ diễn.");b.status="cho_hoan_tat"}
+  else if(action==="hoan_tat"){if(!(b.customer===u.id||staff))fail("Khách xác nhận hoàn tất.");if(b.status!=="cho_hoan_tat")fail("Chưa ở bước xác nhận hoàn tất.");b.status="hoan_thanh"}
+  audit("Booking: "+action,b.id);
+  [b.customer,artist(b.artist).owner].forEach(x=>{if(x!==u.id)notify(x,`Booking ${b.code}: ${LBL[b.status]}`,{v:"booking",id:b.id})});
+}
+function refundSuggestion(b,who){
+  const p=paid(b); if(who!=="customer")return p;
+  const days=(b.start-now())/D; const pct=(b.snap.policy.find(r=>days>=r.min)||{pct:0}).pct;
+  const dep=Math.min(p,b.deposit); return Math.round(dep*pct/100)+(p-dep);
+}
+function cancelBooking(bid,reason,force){
+  const u=me(),b=S.bookings.find(x=>x.id===bid);
+  if(!reason||reason.trim().length<5)fail("Ghi lý do hủy (ít nhất 5 ký tự).");
+  if(["hoan_thanh","huy","dang_thuc_hien","cho_hoan_tat"].includes(b.status))fail("Không thể hủy ở trạng thái này.");
+  const who=b.customer===u.id?"customer":artist(b.artist).owner===u.id?"artist":"staff";
+  b.refund=refundSuggestion(b,who);b.status="huy";b.cancelBy=who;b.cancelReason=reason.trim();
+  S.slots.find(s=>s.id===b.slot).active=false;
+  if(who==="artist"&&!force&&b.start-now()<24*H){const a=artist(b.artist);a.suspendedUntil=now()+CFG.suspend;S.incidents.unshift({id:uid("i"),booking:b.id,kind:"Nghệ sĩ hủy sát giờ",sev:"khan",desc:"Nghệ sĩ hủy dưới 24 giờ trước giờ diễn. Đã tạm khóa nhận lời mời 90 ngày; hỗ trợ khách tìm người thay (chỉ khi khách đồng ý).",status:"moi",at:now(),res:""})}
+  staffNotify(`Booking ${b.code} bị hủy — hoàn đề xuất ${vnd(b.refund)}`,{v:"booking",id:b.id});
+  [b.customer,artist(b.artist).owner].forEach(x=>{if(x!==u.id)notify(x,`Booking ${b.code} đã bị hủy: ${reason.trim()}`,{v:"booking",id:b.id})});
+  audit("Hủy booking",b.id);
+}
+function openIncident(bid,kind,desc){
+  const b=S.bookings.find(x=>x.id===bid); if(!desc||desc.trim().length<5)fail("Mô tả ngắn sự cố.");
+  const sev=b.start-now()<24*H||kind==="Nghệ sĩ không đến"?"khan":"cao";
+  S.incidents.unshift({id:uid("i"),booking:bid,kind,sev,desc:desc.trim(),status:"moi",at:now(),res:"",by:S.me});
+  staffNotify(`Sự cố ${sev==="khan"?"KHẨN":""} ở ${b.code}: ${kind}`,{v:"booking",id:b.id});
+}
+function updateIncident(iid,status,res){need("coordinator");const i=S.incidents.find(x=>x.id===iid);if(["da_giai_quyet","dong"].includes(status)&&(!res||res.trim().length<5))fail("Ghi cách xử lý trước khi đóng.");i.status=status;i.res=res||"";if(i.by)notify(i.by,`Sự cố cập nhật: ${LBL[status]||status}`,{v:"booking",id:i.booking})}
+function addBusy(startV,endV,note){need("artist");const a=myArtist(),s=parseLocal(startV),e=parseLocal(endV);if(s==null||e==null||e<=s)fail("Nhập khoảng thời gian hợp lệ.");sweep();if(overlap(a.id,s,e))fail("Khung giờ này đã có lịch khác.");S.slots.push({id:uid("s"),artist:a.id,kind:"ngoai",a:s,b:e,active:true,note:(note||"").slice(0,200)})}
+function setPayout(bank,number,holder){need("artist");if(!bank||!holder)fail("Nhập ngân hàng và tên chủ tài khoản.");if(!/^\d{6,20}$/.test(number||""))fail("Số tài khoản gồm 6–20 chữ số.");myArtist().payout={bank:bank.trim(),number,holder:holder.trim().toUpperCase()}}
+function deleteAccount(){
+  const u=me(),a=myArtist();
+  if(S.bookings.some(b=>(b.customer===u.id||(a&&b.artist===a.id))&&!["hoan_thanh","huy"].includes(b.status)))fail("Bạn còn booking chưa kết thúc. Hủy hoặc hoàn tất trước khi xóa tài khoản.");
+  S.messages.forEach(m=>{if(m.from===u.id)m.body="[Nội dung đã xóa theo yêu cầu người dùng]"});
+  S.notifs=S.notifs.filter(n=>n.user!==u.id);
+  if(a){a.status="an";a.payout=null;a.name="Nghệ sĩ đã xóa tài khoản";a.bio=""}
+  u.name="Người dùng đã xóa";S.deleted.push(u.id);
+}
+
+/* ---------- giao diện ---------- */
+let V={tab:null,stack:[]}, flash=null, draft={};
+const ICON={home:'<path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',cal:'<path d="M7 3v3M17 3v3M3 9h18M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>',bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/>',user:'<path d="M20 21a8 8 0 0 0-16 0M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>',inbox:'<path d="M22 12h-6l-2 3h-4l-2-3H2M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/>',list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'};
+const svg=n=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n]}</svg>`;
+const TABS={customer:[["kham-pha","Khám phá","home"],["su-kien","Sự kiện","cal"],["thong-bao","Thông báo","bell"],["tai-khoan","Tài khoản","user"]],
+  artist:[["loi-moi","Lời mời","inbox"],["lich","Lịch & show","cal"],["thong-bao","Thông báo","bell"],["tai-khoan","Hồ sơ","user"]],
+  coordinator:[["hang-cho","Hàng chờ","list"],["booking","Booking","cal"],["thong-bao","Thông báo","bell"],["tai-khoan","Tài khoản","user"]]};
+const ROLE={customer:"Khách",artist:"Nghệ sĩ",coordinator:"Điều phối"};
+const initials=n=>n.split(/\s+/).filter(w=>w.length>1).slice(-2).map(w=>w[0]).join("").toUpperCase();
+const vis=(a,big)=>`<div class="vis${big?" big":""}" style="--h:${a.hue}" role="img" aria-label="Ảnh minh họa ${esc(a.name)}">${esc(initials(a.name))}<span>Ảnh minh họa</span></div>`;
+
+function go(view){V.stack.push(view);render();scrollTo(0,0)}
+function back(){V.stack.pop();render();scrollTo(0,0)}
+function setTab(t){V.tab=t;V.stack=[];render();scrollTo(0,0)}
+function toast(t){document.querySelectorAll(".toast").forEach(x=>x.remove());const el=document.createElement("div");el.className="toast";el.role="status";el.textContent=t;document.body.appendChild(el);setTimeout(()=>el.remove(),2600)}
+function act(fn,okText){const snap=JSON.stringify(S),vsnap=JSON.stringify(V);try{fn();save();flash=null;if(okText)toast(okText);render()}catch(e){S=JSON.parse(snap);V=JSON.parse(vsnap);const m=e instanceof Err?e.message:"Có lỗi không mong muốn: "+e.message;if(!(e instanceof Err))console.error(e);showErr(m)}}
+function showErr(m){const main=document.getElementById("main");let el=main.querySelector(":scope > .err[data-live]");if(!el){el=document.createElement("div");el.className="err";el.setAttribute("role","alert");el.dataset.live="1";main.prepend(el)}el.textContent=m;scrollTo({top:0,behavior:"smooth"})}
+
+function render(){
+  sweep(); save();
+  const u=me(); if(!V.tab)V.tab=TABS[u.role][0][0];
+  const unread=S.notifs.filter(n=>n.user===u.id&&!n.read).length;
+  document.getElementById("top").innerHTML=`<span class="mark" aria-hidden="true"></span><div class="brand">Đặt nghệ sĩ<small>Bản test · giờ thử ${esc(dt(now()))}</small></div>
+    <button class="who" data-a="sheet" aria-label="Đổi người dùng và công cụ thử nghiệm"><span>${esc(u.name)}</span><span class="r">${ROLE[u.role]}</span></button>`;
+  document.getElementById("tabs").innerHTML=TABS[u.role].map(([k,l,i])=>`<button class="tab" data-tab="${k}" ${V.tab===k&&!V.stack.length?'aria-current="page"':""}>${svg(i)}${l}${k==="thong-bao"&&unread?`<span class="dot">${unread}</span>`:""}</button>`).join("");
+  const top=V.stack[V.stack.length-1];
+  let html="";
+  if(top){html=`<button class="back" data-a="back">← Quay lại</button>`+(VIEWS[top.v]||(()=>"Không tìm thấy màn hình."))(top)}
+  else html=PAGES[V.tab]();
+  document.getElementById("main").innerHTML=(flash?`<div class="err" role="alert">${esc(flash)}</div>`:"")+html;
+  flash=null;
+  bindMoney();
+}
+function bindMoney(){document.querySelectorAll("input[data-money]").forEach(el=>el.addEventListener("input",()=>{const d=el.value.replace(/\D/g,"");el.value=d?Number(d).toLocaleString("vi-VN"):"";const t=document.getElementById("qtotal");if(t){let s=0;document.querySelectorAll("input[data-sum]").forEach(x=>s+=Number(x.value.replace(/\D/g,"")||0));t.textContent=vnd(s)}}))}
+
+/* ----- trang theo tab ----- */
+const PAGES={
+  "kham-pha":()=>{
+    const f=V.filter||"";
+    const list=S.artists.filter(a=>a.status==="da_duyet"&&(!f||a.svc===f));
+    return `<section class="stage wrap" style="margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)))">
+      <div class="eyebrow">MC · CA SĨ · NHÓM NHẠC · HÀ NỘI</div>
+      <h1>Đặt MC, ca sĩ cho tiệc cưới và sự kiện — báo giá ghi rõ từng khoản</h1>
+      <p>Gửi ngày giờ một lần, nhận báo giá kèm điều kiện hủy, giữ lịch có thời hạn và có người điều phối khi có sự cố.</p>
+      <div class="stack" style="margin-top:14px"><button class="btn primary block" data-a="newreq">Nhận báo giá miễn phí</button></div>
+      <div class="trust"><span>✓ Miễn phí trong giai đoạn thử nghiệm</span><span>✓ Điều kiện hủy ghi rõ trước khi đặt</span><span>✓ Theo dõi cọc và thanh toán từng khoản</span></div>
+    </section>
+    <div class="filters" role="group" aria-label="Lọc dịch vụ">${[["","Tất cả"],["ca_si","Ca sĩ"],["mc","MC"],["ban_nhac","Nhóm nhạc"]].map(([k,l])=>`<button class="pill" data-a="filter" data-v="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>
+    <div class="stack" style="margin-top:12px">${list.map(a=>`<button class="card artist" data-a="artist" data-id="${a.id}">${vis(a)}<div style="min-width:0"><div class="row"><span class="chip">${SVC[a.svc]}</span><span class="chip demo">Hồ sơ demo</span></div><div class="h3" style="margin-top:4px">${esc(a.name)}</div><div class="small muted">${esc(a.genres)}</div><div class="small" style="margin-top:2px">${a.price?`Từ <b>${vnd(a.price)}</b> · giá tham khảo`:"<b>Cần báo giá</b>"}</div></div></button>`).join("")||`<div class="empty">Chưa có nghệ sĩ cho dịch vụ này. Gửi yêu cầu để điều phối tìm người giúp.</div>`}</div>`},
+  "su-kien":()=>{
+    const u=me(),reqs=S.requests.filter(r=>r.customer===u.id);
+    if(!reqs.length)return `<div class="stack"><h1 class="h1">Sự kiện của tôi</h1><div class="empty">Bạn chưa có yêu cầu nào.<div style="margin-top:10px"><button class="btn primary" data-a="newreq">Nhận báo giá miễn phí</button></div></div></div>`;
+    return `<div class="stack"><div class="between"><h1 class="h1">Sự kiện của tôi</h1><button class="btn outline" data-a="newreq">+ Yêu cầu</button></div>${reqs.map(r=>{const b=S.bookings.find(x=>x.req===r.id&&x.status!=="huy")||S.bookings.find(x=>x.req===r.id);const nq=S.quotes.filter(q=>q.req===r.id&&q.status==="da_gui").length;return `<button class="card" style="text-align:left;width:100%;cursor:pointer" data-a="${b?"booking":"req"}" data-id="${b?b.id:r.id}"><div class="between"><div style="min-width:0"><div class="kicker">${SVC[r.svc]} · ${esc(r.event)}</div><div class="h3">${esc(range(r.start,r.end))}</div><div class="small muted">${esc(r.area)}${b?" · "+esc(artist(b.artist).name):nq?` · ${nq} báo giá mới`:""}</div></div>${badge(b?b.status:r.status)}</div></button>`}).join("")}</div>`},
+  "thong-bao":()=>{
+    const u=me(),list=S.notifs.filter(n=>n.user===u.id);
+    const html=`<div class="stack"><h1 class="h1">Thông báo</h1><p class="hint">Bản test chỉ có thông báo trong ứng dụng. Bản thật sẽ gửi thêm qua Zalo khi có Zalo OA.</p>${list.length?`<ul class="list">${list.map(n=>`<li><button class="card" style="width:100%;text-align:left;cursor:pointer;${n.read?"":"border-left:4px solid var(--brand)"}" data-a="notif" data-id="${n.id}"><div>${esc(n.text)}</div><div class="small muted">${esc(dt(n.at))}</div></button></li>`).join("")}</ul>`:`<div class="empty">Chưa có thông báo.</div>`}</div>`;
+    list.forEach(n=>n.read=true);save();return html},
+  "tai-khoan":()=>{
+    const u=me(),a=myArtist();
+    let html=`<div class="stack"><h1 class="h1">${esc(u.name)}</h1><p class="muted">${ROLE[u.role]} · ${esc(u.sub||"")}</p>`;
+    if(a){html+=`<section class="card stack"><div class="between"><div class="h2">Hồ sơ nghệ sĩ</div>${badge(a.status)}</div>${vis(a,true)}<div><b>${esc(a.genres)}</b></div><p class="small">${esc(a.bio)}</p><button class="btn ghost" data-a="artist" data-id="${a.id}">Xem như khách thấy</button></section>
+      <section class="card stack"><div class="h2">Tài khoản nhận tiền</div><p class="hint">Khách chuyển khoản thẳng cho bạn. Chỉ khách đã có booking với bạn mới thấy thông tin này.</p>
+      <div class="field"><label for="pb">Ngân hàng</label><input id="pb" value="${esc(a.payout?.bank||"")}"></div>
+      <div class="field"><label for="pn">Số tài khoản</label><input id="pn" inputmode="numeric" value="${esc(a.payout?.number||"")}"></div>
+      <div class="field"><label for="ph">Tên chủ tài khoản</label><input id="ph" value="${esc(a.payout?.holder||"")}"></div>
+      <button class="btn outline" data-a="payout">Lưu tài khoản nhận tiền</button></section>`}
+    html+=`<section class="card stack"><div class="h2">Xóa tài khoản</div><p class="hint">Xóa dữ liệu cá nhân, ẩn danh hồ sơ và thay nội dung tin nhắn đã gửi. Bản ghi giao dịch được giữ ở dạng ẩn danh. Không xóa được khi còn booking chưa kết thúc.</p>
+      ${V.confirmDel?`<div class="err">Xóa tài khoản không thể hoàn tác. Bấm "Xóa vĩnh viễn" để tiếp tục.</div><div class="row"><button class="btn danger" data-a="delacc">Xóa vĩnh viễn</button><button class="btn ghost" data-a="nodel">Không xóa</button></div>`:`<button class="btn danger" data-a="askdel">Xóa tài khoản của tôi</button>`}</section>
+      <section class="card stack"><div class="h3">Về bản test</div><p class="small muted">Dữ liệu là dữ liệu thử, lưu trên điện thoại này. Đổi vai trò ở nút tên người dùng trên cùng (khách / nghệ sĩ / điều phối) để thử đủ luồng. Có công cụ tua thời gian để thử giữ lịch hết hạn và ngày diễn.</p></section></div>`;
+    return html},
+  "loi-moi":()=>{
+    const a=myArtist(); if(!a)return `<div class="empty">Chưa có hồ sơ nghệ sĩ.</div>`;
+    const inv=S.invitations.filter(i=>i.artist===a.id);
+    const open=inv.filter(i=>["moi","hoi_them"].includes(i.status)), quoted=inv.filter(i=>i.status==="da_bao_gia");
+    return `<div class="stack"><h1 class="h1">Lời mời báo giá</h1>${a.suspendedUntil>now()?`<div class="err">Bạn đang tạm ngừng nhận lời mời tới ${esc(dt(a.suspendedUntil))} do hủy sát giờ.</div>`:""}
+      ${open.length?open.map(i=>{const r=S.requests.find(x=>x.id===i.req);return `<article class="card stack"><div class="between"><div style="min-width:0"><div class="kicker">${SVC[r.svc]} · ${esc(r.event)}</div><div class="h3">${esc(range(r.start,r.end))}</div><div class="small muted">${esc(r.area)} · Ngân sách ${r.budget?vnd(r.budget):"chưa xác định"}</div></div>${badge(i.status)}</div>
+        ${r.style||r.notes?`<p class="small">${esc([r.style,r.notes].filter(Boolean).join(" · "))}</p>`:""}
+        <p class="hint">Hạn phản hồi ${esc(dt(i.respondBy))}. Địa chỉ và liên hệ hiện trường hiện khi khách đặt với bạn.</p>
+        <div class="row"><button class="btn primary" data-a="quote" data-id="${r.id}">Gửi giá</button><button class="btn ghost" data-a="askq" data-id="${i.id}">Hỏi thêm</button><button class="btn ghost" data-a="decline" data-id="${i.id}">Không nhận</button><button class="btn ghost" data-a="req" data-id="${r.id}">Tin nhắn</button></div></article>`}).join(""):`<div class="empty">Chưa có lời mời mới. Đổi sang vai trò khách để gửi yêu cầu mời bạn.</div>`}
+      ${quoted.length?`<div class="h2" style="margin-top:8px">Đã báo giá</div>${quoted.map(i=>{const r=S.requests.find(x=>x.id===i.req);return `<button class="card" style="text-align:left;cursor:pointer;width:100%" data-a="req" data-id="${r.id}"><div class="between"><div><div class="h3">${esc(r.event)} · ${esc(range(r.start,r.end))}</div><div class="small muted">${esc(r.area)}</div></div>${badge(r.status)}</div></button>`}).join("")}`:""}</div>`},
+  "lich":()=>{
+    const a=myArtist(); const bks=S.bookings.filter(b=>b.artist===a.id);
+    const slots=S.slots.filter(s=>s.artist===a.id&&s.active&&s.b>now()).sort((x,y)=>x.a-y.a);
+    const KL={ngoai:"Bận riêng / show ngoài",giu_cho:"Khách đang giữ lịch",booking:"Booking"};
+    return `<div class="stack"><h1 class="h1">Lịch & show</h1>
+      <div class="h2">Booking</div>${bks.length?bks.map(b=>`<button class="card" style="text-align:left;width:100%;cursor:pointer" data-a="booking" data-id="${b.id}"><div class="between"><div><div class="h3">${esc(S.requests.find(r=>r.id===b.req).event)} · <span class="code">${b.code}</span></div><div class="small muted">${esc(range(b.start,b.end))}</div></div>${badge(b.status)}</div></button>`).join(""):`<div class="empty">Chưa có booking.</div>`}
+      <div class="h2">Lịch bận</div><p class="hint">Nhập cả show nhận ngoài để không bị mời trùng. Khách chỉ thấy "bận", không thấy ghi chú.</p>
+      ${slots.length?`<ul class="list">${slots.map(s=>`<li class="card small"><b>${esc(range(s.a,s.b))}</b> · ${KL[s.kind]}${s.note?` — ${esc(s.note)}`:""}${s.kind!=="ngoai"?" (đã gồm đệm di chuyển)":""}</li>`).join("")}</ul>`:""}
+      <section class="card stack"><div class="h3">Thêm lịch bận</div><div class="two"><div class="field"><label for="bs">Từ</label><input id="bs" type="datetime-local"></div><div class="field"><label for="be">Đến</label><input id="be" type="datetime-local"></div></div>
+      <div class="field"><label for="bn">Ghi chú riêng</label><input id="bn" maxlength="200" placeholder="Chỉ bạn và điều phối thấy"></div><button class="btn outline" data-a="busy">Lưu lịch bận</button></section></div>`},
+  "hang-cho":()=>{
+    const inc=S.incidents.filter(i=>!["da_giai_quyet","dong"].includes(i.status)).sort((x,y)=>(x.sev==="khan"?0:1)-(y.sev==="khan"?0:1));
+    const reqs=S.requests.filter(r=>["da_gui","dang_tim"].includes(r.status));
+    const pend=S.payments.filter(p=>p.status==="cho_doi_soat");
+    return `<div class="stack"><h1 class="h1">Hàng chờ điều phối</h1>
+      <div class="two"><div class="card"><div class="kicker">Sự cố mở</div><div class="h1">${inc.length}</div></div><div class="card"><div class="kicker">Yêu cầu đang tìm</div><div class="h1">${reqs.length}</div></div></div>
+      <div class="h2">Sự cố</div>${inc.length?inc.map(i=>{const b=S.bookings.find(x=>x.id===i.booking);return `<button class="card sev-${i.sev}" style="text-align:left;width:100%;cursor:pointer" data-a="booking" data-id="${i.booking}"><div class="between"><div style="min-width:0"><div class="kicker">${i.sev==="khan"?"KHẨN · ":""}${esc(i.kind)}</div><div class="small">${esc(i.desc)}</div><div class="small muted">${b?"Booking "+b.code+" · ":""}${esc(dt(i.at))}</div></div>${badge(i.status)}</div></button>`}).join(""):`<div class="empty">Không có sự cố mở.</div>`}
+      <div class="h2">Yêu cầu cần mời nghệ sĩ</div>${reqs.length?reqs.map(r=>{const o=S.invitations.filter(i=>i.req===r.id&&["moi","hoi_them"].includes(i.status)).length;return `<button class="card" style="text-align:left;width:100%;cursor:pointer" data-a="req" data-id="${r.id}"><div class="between"><div><div class="kicker">${SVC[r.svc]} · ${esc(r.event)} · ${esc(userName(r.customer))}</div><div class="h3">${esc(range(r.start,r.end))}</div><div class="small muted">${o} lời mời đang chờ</div></div>${o?badge(r.status):'<span class="badge t-warn">Chưa ai được mời</span>'}</div></button>`}).join(""):`<div class="empty">Không có yêu cầu đang mở.</div>`}
+      <div class="h2">Khoản tiền chờ xác nhận</div><p class="hint">Người nhận tiền (nghệ sĩ) xác nhận; điều phối chỉ can thiệp khi tranh chấp.</p>${pend.length?pend.map(p=>{const b=S.bookings.find(x=>x.id===p.booking);return `<button class="card small" style="text-align:left;width:100%;cursor:pointer" data-a="booking" data-id="${b.id}"><b>${vnd(p.amount)}</b> · ${p.kind==="hoan_tien"?"Hoàn tiền":"Khách báo đã chuyển"} · <span class="code">${b.code}</span> · ${esc(dt(p.at))}</button>`}).join(""):`<div class="empty">Không có.</div>`}</div>`},
+  "booking":()=>`<div class="stack"><h1 class="h1">Tất cả booking</h1>${S.bookings.length?S.bookings.map(b=>`<button class="card" style="text-align:left;width:100%;cursor:pointer" data-a="booking" data-id="${b.id}"><div class="between"><div><div class="h3"><span class="code">${b.code}</span> · ${esc(artist(b.artist).name)}</div><div class="small muted">${esc(range(b.start,b.end))} · ${esc(userName(b.customer))}</div></div>${badge(b.status)}</div></button>`).join(""):`<div class="empty">Chưa có booking.</div>`}</div>`,
+};
+
+/* ----- màn hình chi tiết ----- */
+const VIEWS={
+  artist:({id})=>{const a=artist(id);const u=me();return `<div class="stack">${vis(a,true)}<div class="row"><span class="chip">${SVC[a.svc]}</span><span class="chip demo">Hồ sơ demo</span></div><h1 class="h1">${esc(a.name)}</h1><p class="muted">${esc(a.area)} · ${esc(a.genres)}</p>
+    <section class="card stack"><p>${esc(a.bio)}</p><div class="small"><b>Phù hợp:</b> ${esc(a.events)}</div><p class="hint">Clip biểu diễn: hồ sơ demo chưa có video được cấp quyền.</p></section>
+    <section class="card"><div class="h3">${a.price?`Từ ${vnd(a.price)}`:"Cần báo giá"}</div><p class="hint">Giá tham khảo chưa phải tổng tiền. Tổng chốt nằm trong báo giá có hạng mục và hạn hiệu lực.</p></section>
+    ${u.role==="customer"?`<button class="btn primary block" data-a="newreq" data-id="${a.id}">Nhận báo giá từ ${esc(a.name)}</button>`:""}</div>`},
+  newreq:({id})=>{const a=id&&artist(id);const d=draft;return `<form class="stack" id="reqform" novalidate><h1 class="h1">${a?"Nhận báo giá từ "+esc(a.name):"Nhận báo giá miễn phí"}</h1><p class="hint">${a?"Yêu cầu gửi tới nghệ sĩ này và đội điều phối.":"Chưa biết chọn ai cũng được — điều phối sẽ gợi ý người phù hợp."} Địa chỉ cụ thể chỉ cần nhập khi bạn chốt đặt.</p>
+    <div class="field"><label for="f-event">Loại sự kiện</label><select id="f-event"><option value="">Chọn loại sự kiện</option>${["Cưới","Sinh nhật","Khai trương","Tiệc nhà hàng","Sự kiện doanh nghiệp","Khác"].map(x=>`<option ${d.event===x?"selected":""}>${x}</option>`).join("")}</select></div>
+    <div class="field"><label for="f-svc">Dịch vụ</label><select id="f-svc" ${a?"disabled":""}>${Object.entries(SVC).map(([k,v])=>`<option value="${k}" ${(a?a.svc:d.svc)===k?"selected":""}>${v}</option>`).join("")}</select></div>
+    <div class="two"><div class="field"><label for="f-start">Bắt đầu</label><input id="f-start" type="datetime-local" value="${esc(d.start||toLocal(now()+10*D-((now()+7*H)%D)+18*H))}"></div><div class="field"><label for="f-end">Kết thúc</label><input id="f-end" type="datetime-local" value="${esc(d.end||toLocal(now()+10*D-((now()+7*H)%D)+21*H))}"></div></div>
+    <div class="field"><label for="f-area">Phường/xã hoặc khu vực</label><input id="f-area" maxlength="80" value="${esc(d.area||"")}" placeholder="VD: Cầu Giấy"></div>
+    <div class="field"><label for="f-budget">Ngân sách dự kiến (VNĐ, không bắt buộc)</label><input id="f-budget" inputmode="numeric" data-money value="${esc(d.budget||"")}" placeholder="VD: 5.000.000"></div>
+    <div class="field"><label for="f-style">Phong cách / bài mong muốn</label><input id="f-style" maxlength="300" value="${esc(d.style||"")}"></div>
+    <div class="field"><label for="f-contact">Người liên hệ tại hiện trường</label><input id="f-contact" maxlength="150" value="${esc(d.contact||"")}" placeholder="Tên và số điện thoại"></div>
+    <div class="field"><label for="f-notes">Ghi chú</label><textarea id="f-notes" maxlength="1500">${esc(d.notes||"")}</textarea></div>
+    <button class="btn primary block" type="submit" data-id="${a?a.id:""}">Gửi yêu cầu</button></form>`},
+  req:({id})=>{
+    const r=S.requests.find(x=>x.id===id),u=me(),isCust=r.customer===u.id,isStaff=u.role==="coordinator",a=myArtist();
+    const quotes=S.quotes.filter(q=>q.req===id&&q.status!=="bi_thay"&&(u.role!=="artist"||q.artist===a.id));
+    const hold=S.holds.filter(h=>h.req===id).slice(-1)[0];
+    const activeHold=hold&&hold.status==="dang_giu"?hold:null;
+    const invs=S.invitations.filter(i=>i.req===id);
+    const booking=S.bookings.find(b=>b.req===id&&b.status!=="huy");
+    let html=`<div class="stack"><div class="between"><div><div class="kicker">${SVC[r.svc]} · ${esc(r.event)}</div><h1 class="h1">${esc(range(r.start,r.end))}</h1><p class="muted">${esc(r.area)}</p></div>${badge(r.status)}</div>`;
+    if(booking&&u.role!=="artist")html+=`<div class="okmsg">Đã tạo booking <span class="code">${booking.code}</span>. <button class="back" data-a="booking" data-id="${booking.id}">Xem tiến độ →</button></div>`;
+    if(activeHold&&isCust){const q=S.quotes.find(x=>x.id===activeHold.quote);const left=Math.max(0,Math.round((activeHold.expires-now())/MIN));
+      html+=`<section class="card stack" style="border-color:var(--brand)"><div class="h2">Đang giữ lịch — còn ${left} phút</div><p>Lịch của <b>${esc(artist(q.artist).name)}</b> được giữ tới ${esc(tm(activeHold.expires))}. Xác nhận để tạo booking.</p>${quoteBox(q)}
+        <div class="field"><label for="addr">Địa chỉ tổ chức cụ thể</label><input id="addr" maxlength="250" placeholder="Số nhà, đường, phường/xã"></div>
+        <label class="row" style="font-weight:500"><input type="checkbox" id="agree" style="width:24px;min-height:24px"> Tôi đồng ý phạm vi, tổng ${vnd(q.total)}, cọc ${vnd(q.deposit)} và điều kiện hủy.</label>
+        <button class="btn primary" data-a="confirm" data-id="${activeHold.id}">Xác nhận đặt show</button><button class="btn ghost" data-a="release" data-id="${activeHold.id}">Bỏ giữ lịch, chọn lại</button></section>`}
+    if(hold&&hold.status==="het_han"&&isCust&&!booking)html+=`<div class="err">Giữ lịch đã hết hạn và lịch đã được giải phóng. Bạn có thể chọn lại báo giá nếu còn hiệu lực.</div>`;
+    html+=`<div class="h2">Báo giá (${quotes.length})</div>`+(quotes.length?quotes.map(q=>{const usable=isCust&&q.status==="da_gui"&&q.validUntil>now()&&!activeHold&&!booking;return `<article class="card stack"><div class="between"><div><div class="h3">${esc(artist(q.artist).name)}</div><div class="small muted">Bản ${q.ver} · hiệu lực tới ${esc(dt(q.validUntil))}</div></div>${badge(q.status)}</div>${quoteBox(q)}${usable?`<button class="btn primary" data-a="accept" data-id="${q.id}">Chọn báo giá này & giữ lịch</button>`:""}</article>`}).join(""):`<div class="empty">${u.role==="artist"?"Bạn chưa gửi báo giá.":"Chưa có báo giá. Bạn sẽ nhận thông báo khi nghệ sĩ gửi giá."}</div>`);
+    if(u.role!=="artist"){
+      html+=`<div class="h2">Nghệ sĩ đã mời</div>${invs.length?`<ul class="list">${invs.map(i=>`<li class="card small row"><b>${esc(artist(i.artist).name)}</b> ${badge(i.status)} ${i.reason&&["tu_choi","dong"].includes(i.status)?`<span class="muted">${esc(i.reason)}</span>`:""}</li>`).join("")}</ul>`:'<p class="muted small">Chưa mời ai.</p>'}`;
+      if(["da_gui","dang_tim"].includes(r.status)&&(isCust||isStaff)){const sug=S.artists.filter(x=>x.status==="da_duyet"&&x.svc===r.svc&&!invs.some(i=>i.artist===x.id));
+        if(sug.length)html+=`<section class="card stack"><div class="h3">Gợi ý phù hợp</div><p class="hint">Cùng dịch vụ; người đã bận khung giờ này bị tắt. Mời tối đa ${CFG.wave} người mỗi đợt.</p>${sug.map(x=>{const b=busy(x.id,r.start,r.end)||x.suspendedUntil>now();return `<label class="row" style="font-weight:500"><input type="checkbox" class="inv" value="${x.id}" ${b?"disabled":""} style="width:24px;min-height:24px"> ${esc(x.name)} <span class="muted small">${b?"Bận":x.price?"từ "+vnd(x.price):"cần báo giá"}</span></label>`}).join("")}<button class="btn outline" data-a="invite" data-id="${r.id}">Gửi lời mời báo giá</button></section>`;
+        else html+=`<div class="empty">Không còn nghệ sĩ phù hợp chưa mời. Điều phối sẽ liên hệ nếu tìm thêm được người.</div>`}
+      html+=`<section class="card stack"><div class="h3">Yêu cầu đã gửi</div><div class="small">Ngân sách: ${r.budget?vnd(r.budget):"chưa xác định"}${r.style?" · "+esc(r.style):""}</div>${r.notes?`<div class="small">${esc(r.notes)}</div>`:""}<div class="small">Địa chỉ: ${r.address?esc(r.address):"nhập khi chốt đặt"}</div></section>`;
+    }
+    const threadArtist=u.role==="artist"?a.id:(V.thread&&invs.some(i=>i.artist===V.thread)?V.thread:(invs[0]||{}).artist);
+    const msgs=S.messages.filter(m=>m.req===id&&(u.role==="artist"?m.artist===a.id:true));
+    html+=`<div class="h2">Trao đổi</div><p class="hint">Chỉ khách, nghệ sĩ liên quan và điều phối đọc được. Mỗi nghệ sĩ một luồng riêng.</p><div class="thread">${msgs.map(m=>`<div class="msg ${m.from===u.id?"me":""}"><div class="small muted">${esc(userName(m.from))}${u.role!=="artist"&&m.artist?" · luồng "+esc(artist(m.artist).name):""}</div>${esc(m.body)}</div>`).join("")||'<p class="muted small">Chưa có tin nhắn.</p>'}</div>`;
+    if(u.role==="artist"||invs.length)html+=`<div class="stack">${u.role!=="artist"?`<div class="field"><label for="mt">Gửi tới</label><select id="mt">${invs.map(i=>`<option value="${i.artist}" ${i.artist===threadArtist?"selected":""}>${esc(artist(i.artist).name)}</option>`).join("")}</select></div>`:""}<div class="field"><label for="mb">Tin nhắn</label><textarea id="mb" maxlength="2000"></textarea></div><button class="btn outline" data-a="msg" data-id="${id}">Gửi tin nhắn</button></div>`;
+    if(isCust&&["da_gui","dang_tim"].includes(r.status))html+=`<button class="btn danger" data-a="closereq" data-id="${id}">Hủy yêu cầu</button>`;
+    return html+`</div>`},
+  quote:({id})=>{const r=S.requests.find(x=>x.id===id);return `<form class="stack" id="quoteform" data-id="${id}" novalidate><h1 class="h1">Gửi báo giá</h1><p class="muted">${esc(r.event)} · ${esc(range(r.start,r.end))} · ${esc(r.area)}</p>
+    <p class="hint">Tổng tiền do hệ thống cộng từ các hạng mục. Cọc phải từ ${CFG.depMin}% đến ${CFG.depMax}% tổng (mặc định ${CFG.depDef}%).</p>
+    ${[["bieu_dien","Biểu diễn"],["di_chuyen","Di chuyển"],["thiet_bi","Thiết bị"]].map(([k,l],n)=>`<div class="card stack"><div class="h3">${l}</div><input type="hidden" class="qk" value="${k}"><div class="two"><div class="field"><label for="ql${n}">Mô tả</label><input id="ql${n}" class="ql"></div><div class="field"><label for="qa${n}">Số tiền (VNĐ)</label><input id="qa${n}" class="qa" inputmode="numeric" data-money data-sum></div></div></div>`).join("")}
+    <div class="card between"><b>Tổng</b><b id="qtotal">0 đ</b></div>
+    <div class="two"><div class="field"><label for="qd">Tiền cọc (VNĐ)</label><input id="qd" inputmode="numeric" data-money></div><div class="field"><label for="qv">Hiệu lực (ngày)</label><input id="qv" type="number" min="1" max="30" value="5"></div></div>
+    <div class="field"><label for="qs">Phạm vi dịch vụ</label><textarea id="qs" placeholder="Số bài/set, thời lượng, trang phục, soundcheck…"></textarea></div>
+    <p class="hint">Điều kiện hủy áp dụng chung: khách hủy ≥30 ngày hoàn 100% cọc, 8–29 ngày hoàn 50%, ≤7 ngày không hoàn; nghệ sĩ hủy hoàn 100% khách đã trả.</p>
+    <button class="btn primary block" type="submit">Gửi báo giá</button></form>`},
+  booking:({id})=>{
+    const b=S.bookings.find(x=>x.id===id),r=S.requests.find(x=>x.id===b.req),a=artist(b.artist),u=me();
+    const isCust=b.customer===u.id,isArtist=a.owner===u.id,staff=u.role==="coordinator";
+    const steps=[["cho_xac_nhan","Chờ cọc"],["da_xac_nhan","Đã xác nhận"],["dang_thuc_hien","Đang diễn"],["cho_hoan_tat","Chờ xác nhận"],["hoan_thanh","Hoàn thành"]];
+    const idx=steps.findIndex(s=>s[0]===b.status);
+    const pays=S.payments.filter(p=>p.booking===b.id), p=paid(b), ended=["huy","hoan_thanh"].includes(b.status);
+    let next="",btn="";
+    if(b.status==="cho_xac_nhan")next=isCust?(pendingIn(b)?"Đã báo chuyển khoản — chờ nghệ sĩ xác nhận đã nhận.":`Chuyển cọc ${vnd(b.deposit-p)} vào tài khoản nghệ sĩ, rồi bấm "Báo đã chuyển khoản".`):isArtist?"Chờ khách chuyển cọc. Khi tiền vào tài khoản, xác nhận ở mục Tiền.":"Chờ khách chuyển cọc và nghệ sĩ xác nhận.";
+    if(b.status==="da_xac_nhan"){const opens=b.start-CFG.startWin;if(isArtist||staff){if(now()>=opens){next="Đã đến khung giờ diễn.";btn=`<button class="btn primary" data-a="adv" data-v="bat_dau" data-id="${b.id}">Bắt đầu biểu diễn</button>`}else next=`Booking đã xác nhận. Nút "Bắt đầu" mở từ ${dt(opens)}.`}else next="Booking đã xác nhận. Chuẩn bị kịch bản và liên hệ hiện trường."}
+    if(b.status==="dang_thuc_hien"){next="Show đang diễn ra.";if((isArtist||staff)&&now()>=b.start)btn=`<button class="btn primary" data-a="adv" data-v="ket_thuc" data-id="${b.id}">Kết thúc show</button>`}
+    if(b.status==="cho_hoan_tat"){next=isCust?"Xác nhận show đã hoàn tất, hoặc báo sự cố nếu có vấn đề.":"Chờ khách xác nhận hoàn tất.";if(isCust||staff)btn=`<button class="btn primary" data-a="adv" data-v="hoan_tat" data-id="${b.id}">Xác nhận đã hoàn tất</button>`}
+    let html=`<div class="stack"><div class="between"><div><div class="kicker">${esc(r.event)} · Booking <span class="code">${b.code}</span></div><h1 class="h1">${esc(a.name)}</h1><p class="muted">${esc(range(b.start,b.end))}</p></div>${badge(b.status)}</div>`;
+    html+=b.status==="huy"?`<div class="err">Booking đã hủy (${b.cancelBy==="customer"?"khách":b.cancelBy==="artist"?"nghệ sĩ":"điều phối"}): ${esc(b.cancelReason)}. Hoàn tiền đề xuất theo điều kiện đã đồng ý: <b>${vnd(b.refund)}</b>.</div>`:
+      `<div class="timeline">${steps.map(([s,l],i)=>`<div class="${i<idx?"done":i===idx?"cur":""}"><i>${i<idx?"✓":i+1}</i>${l}</div>`).join("")}</div>`;
+    if(next)html+=`<div class="next" role="status">${esc(next)}${btn?`<div style="margin-top:8px">${btn}</div>`:""}</div>`;
+    if(!ended)html+=`<section class="card stack"><div class="h3">Checklist trước giờ diễn</div><ul class="list small"><li>• Có mặt trước: <b>${esc(tm(b.start-CFG.buffer))}</b> (bắt đầu ${esc(tm(b.start))})</li><li>• Địa điểm: ${isCust||isArtist||staff?esc(r.address):""}</li><li>• Liên hệ hiện trường: ${esc(r.contact||"chưa có — khách bổ sung qua tin nhắn")}</li><li>• Kịch bản/bài hát: ${esc(r.style||"thống nhất qua tin nhắn")}</li></ul></section>`;
+    // tiền
+    html+=`<section class="card stack"><div class="h2">Tiền</div>`;
+    if((isCust||staff)&&a.payout)html+=`<div class="card" style="background:var(--brand-soft);border:0"><div class="small">Chuyển khoản tới nghệ sĩ</div><div><b>${esc(a.payout.bank)}</b> · <span class="code">${esc(a.payout.number)}</span></div><div class="small">${esc(a.payout.holder)}</div><div class="small">Nội dung: <span class="code">DNS ${b.code}</span></div></div>`;
+    if((isCust||staff)&&!a.payout)html+=`<div class="err">Nghệ sĩ chưa khai tài khoản nhận tiền — điều phối sẽ liên hệ.</div>`;
+    html+=`<div class="money"><div><span>Tổng (đã khóa)</span><b>${vnd(b.total)}</b></div><div><span>Cọc</span><span>${vnd(b.deposit)}</span></div><div><span>Đã nhận (đã xác nhận)</span><span>${vnd(p)}</span></div><div><span>Chờ xác nhận</span><span>${vnd(pendingIn(b))}</span></div>${refunded(b)?`<div><span>Đã hoàn</span><span>${vnd(refunded(b))}</span></div>`:""}<div class="tot"><span>Còn lại</span><span>${vnd(Math.max(0,b.total-p))}</span></div></div>`;
+    if(pays.length)html+=`<ul class="list">${pays.map(x=>{const canConfirm=x.status==="cho_doi_soat"&&((x.kind==="hoan_tien"?isCust:isArtist)||staff);return `<li class="card small stack"><div class="between"><span><b>${vnd(x.amount)}</b> · ${x.kind==="coc"?"Cọc":x.kind==="con_lai"?"Phần còn lại":"Hoàn tiền"}</span>${badge(x.status)}</div><span class="muted">${esc(dt(x.at))}${x.note?" · "+esc(x.note):""}${x.reason?" · "+esc(x.reason):""}</span>${canConfirm?`<div class="row"><button class="btn primary" data-a="pay-ok" data-id="${x.id}">${x.kind==="hoan_tien"?"Tôi đã nhận lại":"Đã nhận tiền"}</button><button class="btn ghost" data-a="pay-no" data-id="${x.id}">Không khớp</button></div>`:""}</li>`}).join("")}</ul>`;
+    if(isCust&&!ended&&b.total>p+pendingIn(b))html+=`<div class="stack"><div class="two"><div class="field"><label for="pk">Khoản</label><select id="pk"><option value="coc">Cọc</option><option value="con_lai" ${p>=b.deposit?"selected":""}>Phần còn lại</option></select></div><div class="field"><label for="pa">Số tiền (VNĐ)</label><input id="pa" inputmode="numeric" data-money value="${(p<b.deposit?b.deposit-p:b.total-p).toLocaleString("vi-VN")}"></div></div><div class="field"><label for="pnote">Thông tin giao dịch</label><input id="pnote" placeholder="Ngân hàng, giờ chuyển" maxlength="300"></div><button class="btn outline" data-a="pay" data-id="${b.id}">Báo đã chuyển khoản</button></div>`;
+    if((isArtist||staff)&&p>0)html+=`<details><summary class="btn ghost">Ghi nhận đã hoàn tiền cho khách</summary><div class="stack" style="margin-top:8px"><div class="field"><label for="ra">Số tiền hoàn</label><input id="ra" inputmode="numeric" data-money></div><div class="field"><label for="rr">Lý do</label><input id="rr"></div><button class="btn outline" data-a="refund" data-id="${b.id}">Ghi nhận hoàn</button></div></details>`;
+    html+=`</section>`;
+    html+=`<section class="card stack"><div class="h3">Phạm vi đã chấp nhận (bản ${b.snap.ver})</div>${quoteBox({items:b.snap.items,total:b.snap.total,deposit:b.snap.deposit,scope:b.snap.scope})}</section>`;
+    // sự cố
+    const incs=S.incidents.filter(i=>i.booking===b.id);
+    html+=`<div class="h2">Sự cố</div>${incs.map(i=>`<div class="card sev-${i.sev} stack"><div class="between"><b>${i.sev==="khan"?"KHẨN · ":""}${esc(i.kind)}</b>${badge(i.status)}</div><div class="small">${esc(i.desc)}</div>${i.res?`<div class="small"><b>Xử lý:</b> ${esc(i.res)}</div>`:""}${staff&&i.status!=="dong"?`<div class="field"><label for="ir-${i.id}">Ghi chú xử lý</label><input id="ir-${i.id}" value="${esc(i.res)}"></div><div class="row"><button class="btn ghost" data-a="inc" data-v="dang_xu_ly" data-id="${i.id}">Đang xử lý</button><button class="btn outline" data-a="inc" data-v="da_giai_quyet" data-id="${i.id}">Đã giải quyết</button></div>`:""}</div>`).join("")||'<p class="muted small">Không có sự cố.</p>'}`;
+    if(!ended)html+=`<details><summary class="btn outline">Báo sự cố</summary><div class="stack" style="margin-top:8px"><div class="field"><label for="ik">Loại</label><select id="ik">${["Trễ giờ","Không liên lạc được","Thiếu thiết bị","Nghệ sĩ không đến","Khác"].map(x=>`<option>${x}</option>`).join("")}</select></div><div class="field"><label for="idesc">Mô tả</label><textarea id="idesc"></textarea></div><button class="btn primary" data-a="incident" data-id="${b.id}">Gửi sự cố cho điều phối</button></div></details>`;
+    if(!ended&&["cho_xac_nhan","da_xac_nhan"].includes(b.status)){const sug=refundSuggestion(b,isCust?"customer":"artist");
+      html+=`<details><summary class="btn danger">Hủy booking</summary><div class="stack" style="margin-top:8px"><p class="hint">${isCust?`Theo điều kiện đã đồng ý, nếu hủy lúc này bạn được hoàn đề xuất <b>${vnd(sug)}</b>.`:`Nghệ sĩ hủy: hoàn 100% khách đã trả (${vnd(sug)}).${b.start-now()<24*H?" Hủy dưới 24 giờ sẽ bị tạm khóa nhận lời mời 90 ngày, trừ bất khả kháng.":""}`}</p><div class="field"><label for="cr">Lý do hủy</label><input id="cr"></div>${isArtist?`<label class="row" style="font-weight:500"><input type="checkbox" id="cf" style="width:24px;min-height:24px"> Lý do bất khả kháng (ốm nặng có giấy tờ, thiên tai)</label>`:""}<button class="btn danger" data-a="cancel" data-id="${b.id}">Xác nhận hủy</button></div></details>`}
+    html+=`<button class="btn ghost" data-a="req" data-id="${r.id}">Tin nhắn và yêu cầu gốc</button></div>`;
+    return html},
+};
+function quoteBox(q){return `<div class="money small">${q.items.map(i=>`<div><span>${KIND[i.kind]}${i.label&&i.label!==KIND[i.kind]?" — "+esc(i.label):""}</span><span>${vnd(i.amount)}</span></div>`).join("")}<div class="tot"><span>Tổng</span><span>${vnd(q.total)}</span></div><div><span>Cọc</span><span>${vnd(q.deposit)}</span></div></div><div class="small"><b>Phạm vi:</b> ${esc(q.scope)}</div>`}
+
+/* ----- bảng thử nghiệm: đổi vai trò, tua thời gian, đặt lại ----- */
+function sheet(){
+  const o=document.getElementById("overlay");
+  const nextShow=S.bookings.filter(b=>["da_xac_nhan","cho_xac_nhan","dang_thuc_hien"].includes(b.status)).sort((x,y)=>x.start-y.start)[0];
+  o.innerHTML=`<div class="sheet-bg" data-a="closesheet"><div class="sheet stack" role="dialog" aria-label="Công cụ thử nghiệm">
+    <div class="between"><div class="h2">Thử với vai trò</div><button class="btn ghost" data-a="closesheet">Đóng</button></div>
+    <div class="users">${S.users.filter(u=>!S.deleted.includes(u.id)).map(u=>`<button class="user" data-a="as" data-id="${u.id}" aria-current="${u.id===S.me}"><span><b>${esc(u.name)}</b><br><span class="small muted">${esc(u.sub)}</span></span><span class="badge t-info">${ROLE[u.role]}</span></button>`).join("")}</div>
+    <div class="h2">Tua thời gian</div><p class="hint">Giờ thử: <span class="clock">${esc(dt(now()))}</span>. Dùng để thử giữ lịch hết hạn (60 phút), lời mời quá hạn (24 giờ) và ngày diễn.</p>
+    <div class="row"><button class="btn ghost" data-a="tt" data-v="${30*MIN}">+30 phút</button><button class="btn ghost" data-a="tt" data-v="${2*H}">+2 giờ</button><button class="btn ghost" data-a="tt" data-v="${D}">+1 ngày</button>${nextShow?`<button class="btn outline" data-a="ttshow" data-id="${nextShow.id}">Tới 1 giờ trước show ${nextShow.code}</button>`:""}<button class="btn ghost" data-a="ttreset">Về giờ thật</button></div>
+    <div class="h2">Dữ liệu thử</div><p class="hint">Dữ liệu lưu trên điện thoại này. Đặt lại để bắt đầu từ đầu.</p>
+    ${V.confirmReset?`<div class="row"><button class="btn danger" data-a="reset">Xóa và đặt lại</button><button class="btn ghost" data-a="noreset">Không</button></div>`:`<button class="btn danger" data-a="askreset">Đặt lại dữ liệu thử</button>`}
+  </div></div>`;
+}
+function closeSheet(){document.getElementById("overlay").innerHTML="";V.confirmReset=false}
+const val=id=>(document.getElementById(id)||{}).value||"";
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-a],[data-tab]"); if(!t)return;
+  if(t.dataset.tab){setTab(t.dataset.tab);return}
+  const a=t.dataset.a,id=t.dataset.id,v=t.dataset.v;
+  if(a==="sheet")return sheet();
+  if(a==="closesheet"){if(e.target===t||t.tagName==="BUTTON")closeSheet();return}
+  if(a==="as"){S.me=id;V={tab:null,stack:[]};save();closeSheet();render();toast("Đang dùng: "+userName(id));return}
+  if(a==="tt"){S.offset+=Number(v);save();render();sheet();return}
+  if(a==="ttshow"){const b=S.bookings.find(x=>x.id===id);S.offset+=Math.max(0,b.start-H-now());save();render();sheet();return}
+  if(a==="ttreset"){S.offset=0;save();render();sheet();return}
+  if(a==="askreset"){V.confirmReset=true;sheet();return}
+  if(a==="noreset"){V.confirmReset=false;sheet();return}
+  if(a==="reset"){S=seed();mem=null;save();V={tab:null,stack:[]};closeSheet();render();toast("Đã đặt lại dữ liệu thử");return}
+  if(a==="back")return back();
+  if(a==="filter"){V.filter=v;render();return}
+  if(a==="artist")return go({v:"artist",id});
+  if(a==="newreq"){if(me().role!=="customer"){showErr("Đổi sang vai trò khách (nút tên người dùng) để gửi yêu cầu.");return}return go({v:"newreq",id})}
+  if(a==="req")return go({v:"req",id});
+  if(a==="booking")return go({v:"booking",id});
+  if(a==="quote")return go({v:"quote",id});
+  if(a==="notif"){const n=S.notifs.find(x=>x.id===id);if(n&&n.go){if(n.go.v==="inv")return setTab("loi-moi");if(n.go.v==="cal")return setTab("lich");return go(n.go)}return}
+  if(a==="askq"){go({v:"askform",id});return}
+  if(a==="decline"){go({v:"declineform",id});return}
+  if(a==="invite")return act(()=>invite(id,[...document.querySelectorAll(".inv:checked")].map(x=>x.value)),"Đã gửi lời mời");
+  if(a==="accept")return act(()=>acceptQuote(id),"Đã giữ lịch 60 phút");
+  if(a==="release")return act(()=>releaseHold(id),"Đã bỏ giữ lịch");
+  if(a==="confirm")return act(()=>{if(!document.getElementById("agree").checked)fail("Tick đồng ý phạm vi và điều kiện hủy.");const b=confirmBooking(id,val("addr"));V.stack.pop();V.stack.push({v:"booking",id:b.id})},"Đã tạo booking");
+  if(a==="msg")return act(()=>{postMessage(id,val("mt"),val("mb"));V.thread=val("mt")},"Đã gửi tin nhắn");
+  if(a==="closereq")return act(()=>{const r=S.requests.find(x=>x.id===id);if(!["da_gui","dang_tim"].includes(r.status))fail("Không thể hủy.");r.status="huy";S.invitations.forEach(i=>{if(i.req===id&&["moi","hoi_them","da_bao_gia"].includes(i.status))i.status="dong"})},"Đã hủy yêu cầu");
+  if(a==="pay")return act(()=>reportPayment(id,val("pk"),val("pa"),val("pnote")),"Đã báo chuyển khoản — chờ nghệ sĩ xác nhận");
+  if(a==="pay-ok")return act(()=>confirmPayment(id,"da_nhan",me().role==="coordinator"?"Điều phối xác nhận theo sao kê":""),"Đã xác nhận");
+  if(a==="pay-no")return go({v:"payno",id});
+  if(a==="refund")return act(()=>recordRefund(id,val("ra"),val("rr")),"Đã ghi nhận hoàn tiền");
+  if(a==="adv")return act(()=>advance(id,v),"Đã cập nhật");
+  if(a==="incident")return act(()=>openIncident(id,val("ik"),val("idesc")),"Đã gửi sự cố cho điều phối");
+  if(a==="inc")return act(()=>updateIncident(id,v,val("ir-"+id)),"Đã cập nhật sự cố");
+  if(a==="cancel")return act(()=>cancelBooking(id,val("cr"),(document.getElementById("cf")||{}).checked),"Đã hủy booking");
+  if(a==="busy")return act(()=>addBusy(val("bs"),val("be"),val("bn")),"Đã lưu lịch bận");
+  if(a==="payout")return act(()=>setPayout(val("pb"),val("pn"),val("ph")),"Đã lưu tài khoản nhận tiền");
+  if(a==="askdel"){V.confirmDel=true;render();return}
+  if(a==="nodel"){V.confirmDel=false;render();return}
+  if(a==="delacc")return act(()=>{deleteAccount();V.confirmDel=false;const next=S.users.find(u=>!S.deleted.includes(u.id));S.me=next.id;V={tab:null,stack:[]}},"Đã xóa tài khoản — chuyển sang người dùng thử khác");
+  if(a==="submitask")return act(()=>{respond(id,"hoi_them",val("aq"));V.stack.pop()},"Đã gửi câu hỏi");
+  if(a==="submitdecline")return act(()=>{respond(id,"tu_choi",val("dr"));V.stack.pop()},"Đã báo không nhận");
+  if(a==="submitpayno")return act(()=>{confirmPayment(id,"tu_choi",val("pr"));V.stack.pop()},"Đã báo không khớp — điều phối sẽ xử lý");
+});
+Object.assign(VIEWS,{
+  askform:({id})=>`<div class="stack"><h1 class="h1">Hỏi thêm khách</h1><div class="field"><label for="aq">Câu hỏi</label><textarea id="aq"></textarea></div><button class="btn primary" data-a="submitask" data-id="${id}">Gửi câu hỏi</button></div>`,
+  declineform:({id})=>`<div class="stack"><h1 class="h1">Không nhận yêu cầu</h1><div class="field"><label for="dr">Lý do</label><select id="dr">${["Không rảnh khung giờ này","Ngân sách thấp hơn mức nhận","Địa điểm quá xa","Thiếu thiết bị yêu cầu","Không đúng phong cách"].map(x=>`<option>${x}</option>`).join("")}</select></div><button class="btn danger" data-a="submitdecline" data-id="${id}">Xác nhận không nhận</button></div>`,
+  payno:({id})=>`<div class="stack"><h1 class="h1">Khoản tiền không khớp</h1><p class="hint">Điều phối sẽ nhận phiếu sự cố tranh chấp tiền.</p><div class="field"><label for="pr">Lý do</label><textarea id="pr" placeholder="VD: Không thấy tiền trong tài khoản"></textarea></div><button class="btn danger" data-a="submitpayno" data-id="${id}">Gửi</button></div>`,
+});
+document.addEventListener("submit",e=>{
+  e.preventDefault();
+  if(e.target.id==="reqform"){const aId=e.target.querySelector("[type=submit]").dataset.id;
+    const f={event:val("f-event"),svc:aId?artist(aId).svc:val("f-svc"),start:val("f-start"),end:val("f-end"),area:val("f-area"),budget:val("f-budget"),style:val("f-style"),contact:val("f-contact"),notes:val("f-notes"),invite:aId||null};
+    draft=f; act(()=>{const r=createRequest(f);draft={};V.stack=[];V.tab="su-kien";V.stack.push({v:"req",id:r.id})},"Đã gửi yêu cầu");}
+  if(e.target.id==="quoteform"){const id=e.target.dataset.id;const ks=[...e.target.querySelectorAll(".qk")].map(x=>x.value),ls=[...e.target.querySelectorAll(".ql")].map(x=>x.value),as=[...e.target.querySelectorAll(".qa")].map(x=>x.value);
+    act(()=>{const items=ks.map((k,n)=>({kind:k,label:ls[n].trim()||KIND[k],amount:parseVnd(as[n])})).filter(x=>x.amount!==null);sendQuote(id,items,val("qd"),Number(val("qv"))||5,val("qs"));V.stack.pop()},"Đã gửi báo giá");}
+});
+setInterval(()=>{const before=JSON.stringify([S.holds.map(h=>h.status),S.invitations.map(i=>i.status)]);sweep();if(JSON.stringify([S.holds.map(h=>h.status),S.invitations.map(i=>i.status)])!==before){save();render()}},20000);
+load(); render();
+</script>
+
+</body>
+</html>
