@@ -1,0 +1,3 @@
+:HL["/dat-nghe-si/r3-b/_next/static/chunks/411ytb-gprh6b.css","style"]
+:HL["https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&display=swap","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"QXwkN0wRwwULha1_5Drpi"}
